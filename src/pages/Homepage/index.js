@@ -9,13 +9,18 @@ const Homepage = () => {
 
     const error = useSelector(state => state.error);
     const avatarLink = useSelector(state => state.avatar);
+    
+
+    let message = error && error.includes("No repos") ?
+    "Theres no repositories for this User !" : "We cannot find that user.  Try a different name."
+    
    
     return (
         <>
         <Header />
         <Form />
         { avatarLink ? <img src={avatarLink} alt="avatar image" style={{width:"5rem"}} /> : <span id="no-image-here"></span> } 
-        { error ? <p role='alert'>Oops!  We cannot find that user.  Try a different name.</p> : <Repo /> }
+        { error ? <p role='alert'>{message}</p> : <Repo /> }
         </>
     )
 }
