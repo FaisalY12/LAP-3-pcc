@@ -11,8 +11,10 @@ const Homepage = () => {
     const avatarLink = useSelector(state => state.avatar);
     
 
-    let message = error && error.includes("No repos") ?
-    "Theres no repositories for this User !" : "We cannot find that user.  Try a different name."
+    let message = error && error.includes("repositories") ?
+    error: "We cannot find that user. Try a different name."
+
+    console.log(message)
     
    
     return (

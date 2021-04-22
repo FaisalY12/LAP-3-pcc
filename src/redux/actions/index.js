@@ -4,15 +4,16 @@ export const getResult = (userSearch) => {
     return async (dispatch) => {
         try {
             const {data} = await axios.get(`https://api.github.com/users/${userSearch}/repos`)
-            if(!data.length) throw new Error('No repos');
+            if(!data.length) throw new Error("Theres no repositories for this User !" );
             let username = data[0].owner.login;
             let list = data.map(repo => repo.name);
             let avatar = data[0].owner.avatar_url;
             dispatch({
                 type: 'LOAD_REPOS',
-                payload: { username, list, avatar, error: false }
+                payload: { username, list, avatar}
             })
         } catch (err) {
+            
             dispatch({
                 type: 'SET_ERROR',
                 payload: err.message
