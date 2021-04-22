@@ -8,6 +8,8 @@ const initState = {
 
 const usernameReducer = (state=initState, action) => {
     switch(action.type){
+        case "LOADING":
+            return { ...state, username: action.payload, repos: [], repoInfo: {}, loading: true, avatar: null, error: false };
         case "LOAD_REPOS":
             const username = action.payload.username;
             const repoList = action.payload.list;
@@ -15,9 +17,9 @@ const usernameReducer = (state=initState, action) => {
             return { ...state, username: username, repos: repoList, avatar: avatar , error: false };
         case "LOAD_REPO_INFO":
             const repoInfo = action.payload;
-            return { ... state, repoInfo: repoInfo};
+            return { ... state, repoInfo: repoInfo, avatar: null, error: false };
         case 'SET_ERROR':
-            return { ...state, error: action.payload }
+            return { ...state, error: action.payload, loading: false }
         default:
             return state;
     }
